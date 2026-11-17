@@ -1,6 +1,6 @@
 # Profit-Driven Bank Customer Churn Prediction & CASA Retention Optimization
 
-Model prediksi churn nasabah bank yang tidak berhenti di pertanyaan *"siapa yang akan pergi?"*, tetapi menjawab pertanyaan bisnis yang sebenarnya: **"siapa yang menguntungkan untuk dipertahankan?"**
+Model prediksi churn nasabah bank yang tidak berhenti di pertanyaan *"siapa yang akan pergi?"*, tetapi menjawab pertanyaan bisnis: **"siapa yang menguntungkan untuk dipertahankan?"**
 
 ![Kurva profit](images/08_profit_curve.png)
 
@@ -36,7 +36,7 @@ Kehilangan nasabah (*customer attrition*) menggerus Dana Pihak Ketiga (DPK/CASA)
 ```
 Data Cleaning & Stratified Split (80/20)
         ↓
-EDA: uji 3 hipotesis bisnis (train set saja)
+EDA: uji 3 hipotesis bisnis (train set)
         ↓
 Feature Engineering: 4 fitur perilaku finansial
         ↓
@@ -44,7 +44,7 @@ Modeling: LogReg vs Random Forest vs LightGBM (5-fold Stratified CV)
         ↓
 Probability Calibration: isotonic vs sigmoid vs raw
         ↓
-Evaluasi final di test set (dibuka satu kali)
+Evaluasi final di test set 
         ↓
 SHAP: interpretasi global & lokal
         ↓
@@ -79,7 +79,7 @@ Efek ketidakaktifan membesar seiring usia: selisih churn tidak aktif vs aktif ha
 | `Tenure_to_Age` | Tenure / Age | Kedalaman hubungan relatif terhadap usia |
 | `Active_Engagement_Score` | NumOfProducts × IsActiveMember | Banyak produk dan aktif vs banyak produk tapi dorman |
 
-`Active_Engagement_Score` memberi sinyal kuat. `Balance_to_Salary` hampir tidak berpengaruh karena `EstimatedSalary` di dataset ini terdistribusi seragam (indikasi data sintetis).
+`Active_Engagement_Score` memberi sinyal kuat. `Balance_to_Salary` hampir tidak berpengaruh karena `EstimatedSalary` di dataset ini terdistribusi seragam.
 
 ## 6. Modeling
 
@@ -113,7 +113,6 @@ Isotonic dan sigmoid calibration diuji melalui nested CV. Keduanya tidak memperb
 | Brier Score | 0,101 | **0,098** |
 | Rata-rata probabilitas vs churn aktual | — | 0,2041 vs 0,2035 |
 
-Skor test setara dengan CV, sehingga model tidak overfitting dan kalibrasinya bertahan di data baru.
 
 ## 7. Interpretasi Model (SHAP)
 
@@ -197,7 +196,6 @@ Save rate dan biaya promo adalah asumsi, sehingga diuji pada 20 kombinasi (save 
 ## 10. Keterbatasan & Pengembangan
 
 - **Pendapatan hanya diproksikan dari margin bunga saldo (NIM) dan fee kartu kredit**, karena dataset tidak memiliki data transaksi. Di bank ritel nyata, rekening bersaldo rendah sering kali milik nasabah transaksional aktif (payroll, transfer, QRIS, pembayaran tagihan) yang menghasilkan *fee-based income* signifikan. Kesimpulan bahwa rekening bersaldo nol tidak layak diberi promo berlaku dalam kerangka NIM saja. **Pengembangan:** mengintegrasikan fee-based income dari data mutasi ke dalam `Revenue`.
-- **Indikasi data sintetis:** tidak ada rekening bersaldo nol di Jerman, churn 100% pada nasabah 4 produk, dan `EstimatedSalary` terdistribusi seragam. Proyek ini adalah *proof of concept* metodologi, bukan estimasi angka riil.
 - **Save rate 40% diasumsikan seragam.** Dalam praktik, efektivitas promo berbeda antarsegmen (misalnya segmen *over-selling*). **Pengembangan:** A/B test kampanye atau *uplift modeling* untuk mengestimasi efek promo per nasabah.
 - **Horizon satu tahun:** nilai seumur hidup nasabah (*customer lifetime value*) belum diperhitungkan.
 - Puncak kurva profit aktual (627 nasabah) berbeda dari batas ENV > 0 (768). Selisih ini hanya bisa diketahui setelah hasil terlihat, sehingga cutoff tidak disesuaikan berdasarkan test set.
@@ -221,7 +219,7 @@ Save rate dan biaya promo adalah asumsi, sehingga diuji pada 20 kombinasi (save 
 
 **Lokal:**
 ```bash
-git clone https://github.com/<username>/bank-churn-casa-retention.git
+git clone https://github.com/MinhajulKhairi/bank-churn-casa-retention.git
 cd bank-churn-casa-retention
 pip install -r requirements.txt
 jupyter notebook notebooks/profit_driven_bank_customer_churn.ipynb
@@ -235,4 +233,4 @@ Seluruh proses memakai `random_state=42`, sehingga hasil dapat direproduksi.
 
 ## Kontak
 
-**[Minhajul Yusri Khairi]** · [LinkedIn](https://www.linkedin.com/in/minhajulkhairi/) · [Email](minhajulkhairi@gmail.com)
+**[Nama](Minhajul Yusri Khairi)** · [LinkedIn](https://www.linkedin.com/in/minhajulkhairi/) · [Email](minhajulkhairi@gmail.com)
