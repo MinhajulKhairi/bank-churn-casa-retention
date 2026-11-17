@@ -233,4 +233,4 @@ Seluruh proses memakai `random_state=42`, sehingga hasil dapat direproduksi.
 
 ## Kontak
 
-**[Nama](Minhajul Yusri Khairi)** · [LinkedIn](https://www.linkedin.com/in/minhajulkhairi/) · [Email](minhajulkhairi@gmail.com)
+**Minhajul Yusri Khairi** · [LinkedIn](https://www.linkedin.com/in/minhajulkhairi/) · [Email](minhajulkhairi@gmail.com)
